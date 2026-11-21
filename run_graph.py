@@ -2,7 +2,7 @@ from app.graph.workflow import graph
 
 
 initial_state = {
-    "repo_path": "my_project",
+    "repo_path": "sample_repo",
     "files": [],
     "bugs": [],
     "security_issues": [],
