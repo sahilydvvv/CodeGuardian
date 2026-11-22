@@ -8,6 +8,8 @@ class CodeGuardianState(TypedDict):
     """
     repo_path: str
     files: list[str]
+    file_contents: dict[str, str]
     bugs: list[str]
     security_issues: list[str]
     file_summary: str
+    skipped_files: list[str]

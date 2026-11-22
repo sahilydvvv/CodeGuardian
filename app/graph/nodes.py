@@ -1,5 +1,5 @@
 from app.graph.state import CodeGuardianState
-import os
+from app.utils.file_reader import read_file, is_file_too_large
 
 
 import os
@@ -83,3 +83,32 @@ def security_analysis_node(state: CodeGuardianState):
     return {
         "security_issues": ["Potential security vulnerability detected"]
     }
+
+def file_reader_node(state: CodeGuardianState):
+    print("Reading repository files...")
+
+    repo_path = state["repo_path"]
+    files = state["files"]
+
+    file_contents = {}
+    skipped_files = []
+
+    for file_path in files:
+        absolute_path = os.path.join(repo_path, file_path)
+
+        if is_file_too_large(absolute_path):
+            print(f"Skipping large file: {file_path}")
+            skipped_files.append(file_path)
+            continue
+
+        code = read_file(absolute_path)
+
+        file_contents[file_path] = code
+
+    print(f"Successfully read {len(file_contents)} files.")
+    print(f"Skipped {len(skipped_files)} large files.")
+
+    return {
+    "file_contents": file_contents,
+    "skipped_files": skipped_files
+}

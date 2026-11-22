@@ -4,9 +4,11 @@ from app.graph.workflow import graph
 initial_state = {
     "repo_path": "sample_repo",
     "files": [],
+    "file_contents": {},
     "bugs": [],
     "security_issues": [],
-    "file_summary": ""
+    "file_summary": "",
+    "skipped_files": []
 }
 
 
